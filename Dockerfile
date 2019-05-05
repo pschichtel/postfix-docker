@@ -1,7 +1,7 @@
-FROM alpine:edge
+FROM debian:buster-slim
 
-RUN apk update \
- && apk add postfix postfix-pcre postfix-sqlite postfix-ldap cyrus-sasl cyrus-sasl-plain
+RUN apt-get update \
+ && apt-get install -y postfix postfix-pcre postfix-sqlite postfix-ldap libsasl2-2 libsasl2-modules libsasl2-modules-db postfix-policyd-spf-python
 
 VOLUME /var/spool/postfix
 
