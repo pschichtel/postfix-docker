@@ -12,5 +12,7 @@ RUN apt-get update \
 
 VOLUME /var/spool/postfix
 
+WORKDIR /var/lib/postfix
+
 ENTRYPOINT ["postfix", "start-fg"]
 
