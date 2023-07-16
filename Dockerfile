@@ -1,4 +1,6 @@
-FROM debian:bullseye-slim
+ARG DEBIAN_CODENAME="trixie"
+
+FROM debian:${DEBIAN_CODENAME}-slim
 
 LABEL maintainer="Phillip Schichtel <phillip@schich.tel>"
 
