@@ -1,6 +1,4 @@
-ARG DEBIAN_CODENAME="trixie"
-
-FROM debian:${DEBIAN_CODENAME}-slim
+FROM debian:sid-slim
 
 LABEL maintainer="Phillip Schichtel <phillip@schich.tel>"
 
@@ -17,5 +15,5 @@ VOLUME /var/spool/postfix
 
 WORKDIR /var/lib/postfix
 
-ENTRYPOINT ["postfix", "start-fg"]
+CMD ["postfix", "start-fg"]
 

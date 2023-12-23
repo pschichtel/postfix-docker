@@ -15,7 +15,12 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image
       run: |
-        image_name="ghcr.io/pschichtel/postfix:latest"
-        podman build -t "$image_name" .
-        podman push "$image_name"
+        repo_name="ghcr.io/pschichtel/postfix"
+        tmp_image_name="$repo_name:latest"
+        podman build -t "$tmp_image_name" .
+        version="$(podman run --rm "$tmp_image_name" postconf -h mail_version)"
+        major_version="$(echo "$version" | cut -d'.' -f1)"
+        podman tag "$tmp_image_name" "$repo_name:$version" "$repo_name:$major_version"
+        podman push "$repo_name:$version"
+        podman push "$repo_name:$major_version"
 
